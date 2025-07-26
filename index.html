@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Angelouxd</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #222, #444, #111);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    h2 {
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+
+    #angelouImg {
+      width: 400px;
+      cursor: pointer;
+      transition: transform 1s ease-in-out;
+    }
+
+    /* Clase que rota 360 grados */
+    .girar {
+      transform: rotate(360deg);
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Haz clic en Angelouxd para escuchar su sabiduría cósmica 😈</h2>
+
+  <img id="angelouImg" src="https://i.imgur.com/Nfrehml.png" alt="Angelouxd">
+
+  <script>
+    const audio = new Audio("https://files.catbox.moe/6r3pnn.mp3");
+    const img = document.getElementById("angelouImg");
+
+    img.addEventListener("click", () => {
+      audio.currentTime = 0;
+      audio.play();
+
+      // Reset y reactivar animación
+      img.classList.remove("girar");
+      void img.offsetWidth; // Fuerza reinicio de clase
+      img.classList.add("girar");
+    });
+  </script>
+
+</body>
+</html>
