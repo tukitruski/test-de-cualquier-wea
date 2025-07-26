@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Angelouxd</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #222, #444, #111);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    h2 {
+      font-weight: 400;
+      margin-bottom: 30px;
+    }
+
+    #angelouImg {
+      width: 400px;
+      cursor: pointer;
+      transition: transform 1s ease-in-out;
+    }
+
+    .girar {
+      transform: rotate(360deg);
+    }
+
+    #debugMenu {
+      position: fixed;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(30,30,30,0.95);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px red;
+      display: none;
+      z-index: 9999;
+    }
+
+    #debugInput {
+      padding: 10px;
+      width: 250px;
+      margin-top: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    #debugError {
+      margin-top: 10px;
+      color: red;
+      font-weight: bold;
+    }
+
+    .brainrot-img {
+      position: absolute;
+      width: 200px;
+      animation: caos 1s infinite alternate ease-in-out;
+      z-index: 9998;
+    }
+
+    @keyframes caos {
+      0% { transform: rotate(0deg) scale(1); top: 0; left: 0; }
+      100% { transform: rotate(360deg) scale(1.5); top: 80%; left: 80%; }
+    }
+
+    body.brainrot-mode {
+      background: repeating-linear-gradient(45deg, red, black 10px, purple 20px);
+      animation: shake 0.1s infinite;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(2px, -2px); }
+      50% { transform: translate(-2px, 2px); }
+      75% { transform: translate(2px, 2px); }
+      100% { transform: translate(-2px, -2px); }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Haz clic en Angelouxd para escuchar su sabiduría cósmica 😈</h2>
+
+  <img id="angelouImg" src="https://i.imgur.com/Nfrehml.png" alt="Angelouxd">
+
+  <div id="debugMenu">
+    <div>BIENVENIDO AL MENU DEBUG, INTENTA EL CÓDIGO QUE QUIERAS COMO TEST</div>
+    <input type="text" id="debugInput" placeholder="Escribe un comando...">
+    <div id="debugError"></div>
+  </div>
+
+  <script>
+    const audio = new Audio("https://files.catbox.moe/6r3pnn.mp3");
+    const img = document.getElementById("angelouImg");
+
+    img.addEventListener("click", () => {
+      audio.currentTime = 0;
+      audio.play();
+      img.classList.remove("girar");
+      void img.offsetWidth;
+      img.classList.add("girar");
+    });
+
+    const debugMenu = document.getElementById("debugMenu");
+    const debugInput = document.getElementById("debugInput");
+    const debugError = document.getElementById("debugError");
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && debugMenu.style.display === "none") {
+        debugMenu.style.display = "block";
+        debugInput.focus();
+      }
+    });
+
+    debugInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        const comando = debugInput.value.trim().toLowerCase();
+        debugInput.value = "";
+
+        if (comando === "brainrot") {
+          activarBrainrot();
+          debugError.textContent = "";
+        } else {
+          debugError.textContent = "k wea esta poniendo";
+        }
+      }
+    });
+
+    function activarBrainrot() {
+      document.body.classList.add("brainrot-mode");
+
+      const imgs = [
+        "https://i.imgur.com/PQF8w8V_d.jpeg",
+        "https://i.imgur.com/iNWQp4Z_d.jpeg",
+        "https://i.imgur.com/7iGBlLm_d.png",
+        "https://i.imgur.com/7iGBlLm_d.png"
+      ];
+
+      for (let i = 0; i < imgs.length; i++) {
+        const img = document.createElement("img");
+        img.src = imgs[i];
+        img.className = "brainrot-img";
+        img.style.top = Math.random() * 80 + "%";
+        img.style.left = Math.random() * 80 + "%";
+        document.body.appendChild(img);
+      }
+
+      for (let i = 0; i < 3; i++) {
+        const audio = new Audio("https://files.catbox.moe/6r3pnn.mp3");
+        setTimeout(() => {
+          audio.play();
+        }, i * 400);
+      }
+
+      const imgPrincipal = document.getElementById("angelouImg");
+      imgPrincipal.style.transition = "transform 0.3s";
+      let rotacion = 0;
+      setInterval(() => {
+        rotacion += 60;
+        imgPrincipal.style.transform = `rotate(${rotacion}deg) scale(1.5)`;
+      }, 300);
+    }
+  </script>
+</body>
+</html>
